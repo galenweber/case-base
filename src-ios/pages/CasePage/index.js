@@ -24,18 +24,20 @@ export default class CasePage extends React.Component {
 
 
   render() {
-
     const pages = this.props.navigation.state.params.pages;
 
     return (
-      <Swiper>
-        {pages.map((Page) => {
-          console.log('page is ', Page);
-          return (<View style={styles.container}>
-            {<Page />}
-          </View>)
-        })}
-      </Swiper>
+      <View
+        style={styles.outer}
+      >
+        <Swiper style={styles.wrapper}>
+          {pages.map((Page, index) => {
+            return (<View style={styles.container} key={`page-${index}`}>
+              {<Page />}
+            </View>)
+          })}
+        </Swiper>
+      </View>
     )
   }
 }

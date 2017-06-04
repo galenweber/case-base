@@ -11,6 +11,8 @@ import { StackNavigator } from 'react-navigation';
 import Home from './src-ios/pages/Home';
 import CasePage from './src-ios/pages/CasePage';
 
+console.ignoredYellowBox = ['Warning: BackAndroid']
+
 const CaseBase = StackNavigator({
   Home: { screen: Home },
   CasePage: { screen: CasePage },
