@@ -1,0 +1,2 @@
+export const SUBMIT_RESPONSE = 'SUBMIT_RESPONSE';
+export const TYPE_INPUT = 'TYPE_INPUT';

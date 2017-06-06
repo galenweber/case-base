@@ -11,6 +11,7 @@ import bcgImgSrc from '../../assets/images/company-logos/bcg/bcg-logo.png';
 
 export default function CasePanel(props) {
   const { navigate } = props.navigation;
+  console.log('case index is ', props.caseIndex);
 
   return (
     <TouchableOpacity
@@ -18,6 +19,7 @@ export default function CasePanel(props) {
       onPress={() => navigate('CasePage', {
         pages: props.pages,
         name: props.name,
+        caseIndex: props.caseIndex,
       })}
     >
       <Image

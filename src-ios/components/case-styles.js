@@ -4,7 +4,7 @@ const styles = {
 
   pageContainer: {
     flex: 1,
-    paddingBottom: 60,
+    paddingBottom: 70,
   },
 
   contentContainer: {
@@ -20,6 +20,7 @@ const styles = {
   listItem: {
     flexDirection: 'row',
   },
+
 };
 
 export default StyleSheet.create(styles);

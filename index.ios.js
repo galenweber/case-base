@@ -3,20 +3,21 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+import React from 'react';
 import {
   AppRegistry,
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import Home from './src-ios/pages/Home';
-import CasePage from './src-ios/pages/CasePage';
+import Main from './src-ios/Main';
 
 console.ignoredYellowBox = ['Warning: BackAndroid']
 
-const CaseBase = StackNavigator({
-  Home: { screen: Home },
-  CasePage: { screen: CasePage },
-});
+class CaseBase extends React.Component {
+  render(){
+    return(
+      <Main />
+    );
+  }
+}
 
 AppRegistry.registerComponent('CaseBase', () => CaseBase);
 
