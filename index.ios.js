@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Main from './src-ios/Main';
 
-console.ignoredYellowBox = ['Warning: BackAndroid']
+console.ignoredYellowBox = ['Warning: BackAndroid', 'Remote debugger']
 
 class CaseBase extends React.Component {
   render(){

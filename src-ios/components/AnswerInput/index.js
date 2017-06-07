@@ -6,9 +6,6 @@ import {
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-function checkAnswer(response, answer, margin) {
-  return ((response >= answer - margin) && (response <= answer + margin));
-}
 
 const AnswerInput = function AnswerInput({ id, responseById, submittedById, handleInput, answer, margin }) {
   const submitted = submittedById[id];

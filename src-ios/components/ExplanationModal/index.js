@@ -11,15 +11,14 @@ import styles from './styles';
 
 class ExplanationModal extends React.Component {
   render() {
-    const {visible = false, toggleModal, id } = this.props;
+    const {visible = false, toggleModal, id, children } = this.props;
     return (
       <Modal
         visible={visible}
       >
         <View style={styles.modal}>
           <View>
-            <Text>Under the current plan, AAT will build a server center and two servers. For every 500 customers signed to AAT’s service, the company will add an additional server. The company expects to capture 1&frasl;8 of the Basra metropolitan market in its first year.</Text>
-            <Text>What is the solution.</Text>
+            {children}
             <View style={styles.filler} >
             </View>
             <Button
@@ -36,6 +35,7 @@ class ExplanationModal extends React.Component {
 
 const propTypes = {
   visible: PropTypes.bool,
+  children: PropTypes.element.isRequired,
 }
 
 ExplanationModal.propTypes = propTypes;

@@ -33,11 +33,11 @@ class CasePage extends React.Component {
         return key;
       });
     });
+    AsyncStorage.clear();
   }
 
   render() {
     const { pages, caseIndex } = this.props.navigation.state.params;
-    console.log('this.prop are ', this.props);
 
     return (
       <View
