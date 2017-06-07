@@ -46,7 +46,7 @@ const styles = {
     alignItems: 'center',
     color: 'rgba(0,0,0,0.54)',
   },
-}
+};
 
 export default StyleSheet.create(styles);
 

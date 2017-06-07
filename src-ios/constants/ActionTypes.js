@@ -1,2 +1,3 @@
 export const SUBMIT_RESPONSE = 'SUBMIT_RESPONSE';
 export const TYPE_INPUT = 'TYPE_INPUT';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';

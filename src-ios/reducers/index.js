@@ -2,79 +2,91 @@ import { AsyncStorage } from 'react-native';
 import {
   SUBMIT_RESPONSE,
   TYPE_INPUT,
+  TOGGLE_MODAL,
 } from '../constants/ActionTypes';
 
 const initialState = {
   inputIds: [],
   responseById: {},
   submittedById: {},
-}
+  modalById: {},
+};
 
 const inputIds = (state = initialState.inputIds, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case TYPE_INPUT:
       if (state.includes(action.id)) {
         return state;
       }
-      return [ ...state, action.id ];
+      return [...state, action.id];
     default:
       return state;
   }
-}
+};
 
-const responseById = ( state = initialState.responseById, action) => {
-  switch(action.type) {
+const responseById = (state = initialState.responseById, action) => {
+  const { id, value } = action;
+  switch (action.type) {
     case TYPE_INPUT:
-      const { id, value } = action;
       return Object.assign(
         {},
         state,
-        { [id]: value }
-      )
+        { [id]: value },
+      );
     default:
       return state;
   }
-}
+};
 
-const asyncStore = ( state = initialState.responseById, action) => {
+const modalById = (state = initialState.modalById, action) => {
   const { id } = action;
-  switch(action.type) {
-    default:
-      console.log('storing in DB!, key', id, 'value ', String(state[id]));
-      AsyncStorage.setItem(id, String(state[id]))
-        .then((res) => {
-          AsyncStorage.getItem(id)
-            .then((response) => console.log('value is ', response))
-            .catch((error) => console.log('error is ', error))
-        })
-  }
-}
-
-const submittedById = ( state = initialState.submittedById, action) => {
-  switch(action.type) {
-    case SUBMIT_RESPONSE:
-      const { id } = action;
+  switch (action.type) {
+    case TOGGLE_MODAL:
       return Object.assign(
         {},
         state,
-        { [id]: true }
-      )
+        { [id]: !state[id] },
+      );
     default:
       return state;
   }
-}
+};
+
+
+const asyncStore = (state = initialState.responseById, action) => {
+  const { id } = action;
+  switch (action.type) {
+    default:
+      AsyncStorage.setItem(id, String(state[id]));
+  }
+};
+
+const submittedById = (state = initialState.submittedById, action) => {
+  const { id } = action;
+  switch (action.type) {
+    case SUBMIT_RESPONSE:
+      return Object.assign(
+        {},
+        state,
+        { [id]: true },
+      );
+    default:
+      return state;
+  }
+};
 
 const caseBaseApp = (state = initialState, action) => {
   switch (action.type) {
     case SUBMIT_RESPONSE:
       asyncStore(state.responseById, action);
-    default:
+    default:  // eslint-disable-line no-fallthrough
       return {
         inputIds: inputIds(state.inputIds, action),
         responseById: responseById(state.responseById, action),
         submittedById: submittedById(state.submittedById, action),
-      }
+        modalById: modalById(state.modalById, action),
+      };
   }
-}
+};
 
 export default caseBaseApp;

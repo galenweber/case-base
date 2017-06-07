@@ -12,9 +12,7 @@ const styles = {
 
   wrapper: {
   },
-
-}
+};
 
 export default StyleSheet.create(styles);
-
 

@@ -31,4 +31,3 @@ const styles = {
 
 export default StyleSheet.create(styles);
 
-

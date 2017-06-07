@@ -3,10 +3,11 @@ import {
   Text,
   View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import styles from './styles';
 import Divider from '../Divider';
 
-export default function Header({ children }) {
+const Header = function Header({ children }) {
   return (
     <View>
       <Text style={styles.header} >
@@ -14,6 +15,14 @@ export default function Header({ children }) {
       </Text>
       <Divider />
     </View>
-  )
-}
+  );
+};
+
+const propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Header.propTypes = propTypes;
+
+export default Header;
 

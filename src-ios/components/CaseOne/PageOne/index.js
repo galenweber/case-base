@@ -8,7 +8,7 @@ import Header from '../../Header';
 import BodyText from '../../BodyText';
 
 
-export default function PageOne(props) {
+export default function PageOne() {
   return (
     <View
       style={styles.pageContainer}
@@ -54,6 +54,6 @@ export default function PageOne(props) {
         </BodyText>
       </ScrollView>
     </View>
-  )
+  );
 }
 

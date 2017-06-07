@@ -1,25 +1,22 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Image,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import styles from './styles';
 import bcgImgSrc from '../../assets/images/company-logos/bcg/bcg-logo.png';
 
-export default function CasePanel(props) {
-  const { navigate } = props.navigation;
-  console.log('case index is ', props.caseIndex);
-
+const CasePanel = function CasePanel({ navigation, pages, name, company, updated, caseIndex }) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigate('CasePage', {
-        pages: props.pages,
-        name: props.name,
-        caseIndex: props.caseIndex,
+      onPress={() => navigation.navigate('CasePage', {
+        pages,
+        name,
+        caseIndex,
       })}
     >
       <Image
@@ -30,19 +27,32 @@ export default function CasePanel(props) {
         style={styles.textBody}
       >
         <Text style={styles.title}>
-          {props.name}
+          {name}
         </Text>
         <Text style={styles.company}>
-          {props.company}
+          {company}
         </Text>
         <View
           style={styles.filler}
         />
         <Text style={styles.updated}>
-          {props.updated}
+          {updated}
         </Text>
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
+
+const propTypes = {
+  caseIndex: PropTypes.number.isRequired,
+  company: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  navigation: PropTypes.object.isRequired,
+  pages: PropTypes.array.isRequired,
+  updated: PropTypes.string.isRequired,
+};
+
+CasePanel.propTypes = propTypes;
+
+export default CasePanel;
 
