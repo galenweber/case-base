@@ -21,9 +21,15 @@ const styles = {
     borderRadius: 4,
   },
 
+  textMoreRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
   textBody: {
     margin: 10,
     flexDirection: 'column',
+    flex: 1,
   },
 
   title: {

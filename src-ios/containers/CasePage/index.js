@@ -20,7 +20,7 @@ class CasePage extends React.Component {
 
   componentDidMount() {
     const { pages, caseIndex } = this.props.navigation.state.params;
-    const { handleInput, submitResponse } = this.props;
+    const { handleInput, setSubmitted } = this.props;
 
     const keys = pages.map((e, i) => `c${caseIndex}p${i}`);
     AsyncStorage.multiGet(keys, (err, stores) => {
@@ -29,11 +29,10 @@ class CasePage extends React.Component {
         const key = store[i][0];
         const value = store[i][1];
         handleInput(key, value);
-        if (value !== null) submitResponse(key);
+        setSubmitted(key, (value !== null));
         return key;
       });
     });
-    AsyncStorage.clear();
   }
 
   render() {

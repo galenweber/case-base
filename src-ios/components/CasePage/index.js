@@ -10,19 +10,18 @@ import SubmitButton from '../SubmitButton';
 import InputRow from '../InputRow';
 
 const CasePage = function CasePage({
+  answer,
   Body,
+  caseIndex,
   Explanation,
-  toggleModal,
-  submitResponse,
-  submittedById,
   handleInput,
-  responseById,
   modalById,
   pageIndex,
-  caseIndex,
-  answer,
+  responseById,
+  submitResponse,
+  submittedById,
+  toggleModal,
 }) {
-
   const id = `c${caseIndex}p${pageIndex}`;
   const response = responseById[id];
   const submitted = submittedById[id];
@@ -40,7 +39,7 @@ const CasePage = function CasePage({
       handleInput,
       id,
     },
-    answer
+    answer,
   );
 
 
@@ -54,34 +53,45 @@ const CasePage = function CasePage({
 
   return (
     <View style={styles.casePage}>
-      <ExplanationModal {...modalProps}>
-        <Explanation />
-      </ExplanationModal>
+      {(answer.type) ? (
+        <ExplanationModal {...modalProps}>
+          <Explanation />
+        </ExplanationModal>
+      ) : <View />}
       <ScrollView>
         <View style={styles.bodyContainer}>
           <Body />
         </View>
       </ScrollView>
-      <View>
-        <InputRow {...inputProps}/>
-        <SubmitButton {...buttonProps}/>
-      </View>
+      {(answer.type) ? (
+        <View style={styles.answerRow}>
+          <View style={styles.inputRow}>
+            <InputRow {...inputProps} />
+          </View>
+          <View style={styles.buttonRow}>
+            <SubmitButton {...buttonProps} />
+          </View>
+        </View>
+      ) : <View />}
     </View>
   );
 };
 
 const propTypes = {
+  answer: PropTypes.shape().isRequired,
   Body: PropTypes.func.isRequired,
-  Explanation: PropTypes.function,
+  caseIndex: PropTypes.number.isRequired,
+  Explanation: PropTypes.func,
+  handleInput: PropTypes.func.isRequired,
+  modalById: PropTypes.shape().isRequired,
+  pageIndex: PropTypes.number.isRequired,
+  responseById: PropTypes.shape().isRequired,
+  submitResponse: PropTypes.func.isRequired,
+  submittedById: PropTypes.shape().isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
-
-const defaultProps = {
-}
 
 CasePage.propTypes = propTypes;
 
 export default CasePage;
-
-
-
 

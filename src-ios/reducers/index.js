@@ -1,6 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import {
+  CLEAR_RESPONSES,
   SUBMIT_RESPONSE,
+  SET_SUBMITTED,
   TYPE_INPUT,
   TOGGLE_MODAL,
 } from '../constants/ActionTypes';
@@ -55,20 +57,39 @@ const modalById = (state = initialState.modalById, action) => {
 
 const asyncStore = (state = initialState.responseById, action) => {
   const { id } = action;
+  const caseId = id.slice(0, id.indexOf('p'));
   switch (action.type) {
     default:
       AsyncStorage.setItem(id, String(state[id]));
+      AsyncStorage.setItem(`LastModified${caseId}`, new Date());
   }
 };
 
+const asyncClear = (state = initialState, action) => {
+  const { ids } = action;
+  const caseId = ids[0].slice(0, ids[0].indexOf('p'));
+  switch (action.type) {
+    default:
+      AsyncStorage.multiRemove(ids);
+      AsyncStorage.setItem(`LastModified${caseId}`, new Date());
+  }
+};
+
+
 const submittedById = (state = initialState.submittedById, action) => {
-  const { id } = action;
+  const { id, bool } = action;
   switch (action.type) {
     case SUBMIT_RESPONSE:
       return Object.assign(
         {},
         state,
         { [id]: true },
+      );
+    case SET_SUBMITTED:
+      return Object.assign(
+        {},
+        state,
+        { [id]: bool },
       );
     default:
       return state;
@@ -79,7 +100,23 @@ const caseBaseApp = (state = initialState, action) => {
   switch (action.type) {
     case SUBMIT_RESPONSE:
       asyncStore(state.responseById, action);
-    default:  // eslint-disable-line no-fallthrough
+      return {
+        inputIds: inputIds(state.inputIds, action),
+        responseById: responseById(state.responseById, action),
+        submittedById: submittedById(state.submittedById, action),
+        modalById: modalById(state.modalById, action),
+      };
+
+    case CLEAR_RESPONSES:
+      asyncClear(state, action);
+      return {
+        inputIds: inputIds(state.inputIds, action),
+        responseById: responseById(state.responseById, action),
+        submittedById: submittedById(state.submittedById, action),
+        modalById: modalById(state.modalById, action),
+      };
+
+    default:
       return {
         inputIds: inputIds(state.inputIds, action),
         responseById: responseById(state.responseById, action),

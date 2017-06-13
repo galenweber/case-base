@@ -2,13 +2,11 @@ import { StyleSheet } from 'react-native';
 
 const styles = {
 
-  textInput: {
-    textAlign: 'right',
-    paddingRight: 10,
-    borderWidth: 0,
-    flex: 1,
+  header: {
+    fontSize: 22,
+    fontWeight: '600',
+    marginBottom: 8,
   },
-
 
 };
 

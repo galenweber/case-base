@@ -11,13 +11,23 @@ const styles = {
 
   bodyContainer: {
     paddingTop: 15,
-    paddingBottom: 60,
+    paddingBottom: 110,
+  },
+
+  answerRow: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'transparent',
+    paddingBottom: 70,
+  },
+
+  inputRow: {
   },
 
 
 };
 
 export default StyleSheet.create(styles);
-
-
 

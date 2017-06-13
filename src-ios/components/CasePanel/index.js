@@ -6,10 +6,14 @@ import {
   Image,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 import styles from './styles';
 import bcgImgSrc from '../../assets/images/company-logos/bcg/bcg-logo.png';
+import settingsImgSrc from '../../assets/images/settings/ic_settings.png';
 
-const CasePanel = function CasePanel({ navigation, pages, name, company, updated, caseIndex }) {
+const CasePanel = function CasePanel({ navigation, pages, name, company, caseIndex, lastModified, }) {
+
+  console.log('lastmodified is ', lastModified);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -26,17 +30,39 @@ const CasePanel = function CasePanel({ navigation, pages, name, company, updated
       <View
         style={styles.textBody}
       >
-        <Text style={styles.title}>
-          {name}
-        </Text>
-        <Text style={styles.company}>
-          {company}
-        </Text>
+        <View style={styles.textMoreRow}>
+          <View>
+            <Text style={styles.title}>
+              {name}
+            </Text>
+            <Text style={styles.company}>
+              {company}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Settings', {
+              caseIndex,
+              name,
+              pages,
+            })}
+          >
+            <Image
+              source={settingsImgSrc}
+            />
+          </TouchableOpacity>
+        </View>
         <View
           style={styles.filler}
         />
         <Text style={styles.updated}>
-          {updated}
+          Last modified: {
+            (lastModified)
+              ? dateFormat(
+                  new Date(lastModified),
+                  'mmmm dS, yyyy, h:MM TT'
+                )
+              : 'Not started'
+          }
         </Text>
       </View>
     </TouchableOpacity>

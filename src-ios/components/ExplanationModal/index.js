@@ -2,42 +2,50 @@ import React from 'react';
 import {
   Button,
   Modal,
-  Text,
-  TouchableHighlight,
   View,
+  ScrollView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-class ExplanationModal extends React.Component {
-  render() {
-    const {visible = false, toggleModal, id, children } = this.props;
-    return (
-      <Modal
-        visible={visible}
-      >
-        <View style={styles.modal}>
-          <View>
+const ExplanationModal = function ExplanationModal({
+  children,
+  id,
+  toggleModal,
+  visible = false,
+}) {
+  return (
+    <Modal
+      visible={visible}
+    >
+      <View style={styles.modal}>
+        <View>
+          <ScrollView>
             {children}
-            <View style={styles.filler} >
-            </View>
-            <Button
-              title="Close Explanation"
-              onPress={() => toggleModal(id)}
-              style={styles.button}
-            />
-          </View>
+          </ScrollView>
+          <Button
+            title="Close Answer"
+            onPress={() => toggleModal(id)}
+            style={styles.button}
+          />
         </View>
-      </Modal>
-    )
-  }
-}
+      </View>
+    </Modal>
+  );
+};
+
+const defaultProps = {
+  visible: false,
+};
 
 const propTypes = {
-  visible: PropTypes.bool,
   children: PropTypes.element.isRequired,
-}
+  id: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  visible: PropTypes.bool,
+};
 
+ExplanationModal.defaultProps = defaultProps;
 ExplanationModal.propTypes = propTypes;
 
 export default ExplanationModal;

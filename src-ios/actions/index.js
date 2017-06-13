@@ -8,6 +8,22 @@ export const submitResponse = id => (
   }
 );
 
+export const clearResponses = ids => (
+  {
+    type: types.CLEAR_RESPONSES,
+    ids,
+  }
+);
+
+
+export const setSubmitted = (id, bool) => (
+  {
+    type: types.SET_SUBMITTED,
+    id,
+    bool,
+  }
+);
+
 export const handleInput = (id, value) => (
   {
     type: types.TYPE_INPUT,
@@ -16,7 +32,7 @@ export const handleInput = (id, value) => (
   }
 );
 
-export const toggleModal = (id) => (
+export const toggleModal = id => (
   {
     type: types.TOGGLE_MODAL,
     id,

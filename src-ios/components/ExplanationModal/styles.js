@@ -14,8 +14,8 @@ const styles = {
   },
 
   button: {
-  }
+  },
 
-}
+};
 
 export default StyleSheet.create(styles);
