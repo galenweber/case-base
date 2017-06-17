@@ -61,7 +61,7 @@ const asyncStore = (state = initialState.responseById, action) => {
   switch (action.type) {
     default:
       AsyncStorage.setItem(id, String(state[id]));
-      AsyncStorage.setItem(`LastModified${caseId}`, new Date());
+      AsyncStorage.setItem(`LastModified${caseId}`, (new Date()).toISOString());
   }
 };
 
@@ -71,7 +71,7 @@ const asyncClear = (state = initialState, action) => {
   switch (action.type) {
     default:
       AsyncStorage.multiRemove(ids);
-      AsyncStorage.setItem(`LastModified${caseId}`, new Date());
+      AsyncStorage.setItem(`LastModified${caseId}`, (new Date()).toISOString());
   }
 };
 

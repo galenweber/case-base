@@ -4,7 +4,8 @@ const styles = {
 
   button: {
     backgroundColor: 'white',
-    paddingTop: 5
+    paddingTop: 5,
+    paddingBottom: 5
   },
 
 };

@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const styles = {
 
   inputRow: {
-    height: 40,
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderBottomWidth: 1,

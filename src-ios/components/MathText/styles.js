@@ -2,14 +2,18 @@ import { StyleSheet } from 'react-native';
 
 const styles = {
 
+  mathScroll: {
+    marginBottom: 15,
+    marginTop: 5,
+    alignSelf: 'stretch',
+    backgroundColor: '#f6f8fa',
+  },
+
   mathText: {
     fontSize: 16,
-    marginTop: 5,
-    marginBottom: 5,
     padding: 10,
     paddingTop: 15,
     paddingBottom: 15,
-    backgroundColor: '#f6f8fa',
     fontFamily: 'Courier New',
   },
 

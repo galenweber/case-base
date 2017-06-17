@@ -13,11 +13,10 @@ import settingsImgSrc from '../../assets/images/settings/ic_settings.png';
 
 const CasePanel = function CasePanel({ navigation, pages, name, company, caseIndex, lastModified, }) {
 
-  console.log('lastmodified is ', lastModified);
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('CasePage', {
+      onPress={() => navigation.navigate('CaseSwiper', {
         pages,
         name,
         caseIndex,
@@ -31,7 +30,9 @@ const CasePanel = function CasePanel({ navigation, pages, name, company, caseInd
         style={styles.textBody}
       >
         <View style={styles.textMoreRow}>
-          <View>
+          <View
+            style={styles.titleAndCompany}
+          >
             <Text style={styles.title}>
               {name}
             </Text>
@@ -75,7 +76,6 @@ const propTypes = {
   name: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired,
   pages: PropTypes.array.isRequired,
-  updated: PropTypes.string.isRequired,
 };
 
 CasePanel.propTypes = propTypes;

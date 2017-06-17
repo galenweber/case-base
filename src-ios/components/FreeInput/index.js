@@ -14,12 +14,14 @@ const FreeInput = function FreeInput({
   id,
 }) {
   return (
-    <TextInput
-      editable={!submitted}
-      style={styles.textInput}
-      onChangeText={text => handleInput(id, text)}
-      value={response}
-    />
+    <View>
+      <TextInput
+        editable={!submitted}
+        style={styles.textInput}
+        onChangeText={text => handleInput(id, text)}
+        value={response}
+      />
+    </View>
   );
 };
 

@@ -5,16 +5,27 @@ import {
 import PropTypes from 'prop-types';
 import styles from './styles';
 import FreeInput from '../FreeInput';
+import PickerInput from '../PickerInput';
 
 const checkAnswer = function checkAnswer(response, answer, margin) {
-  return Math.abs(response - answer) <= margin;
+  const invalidValues = [null, undefined];
+  if (invalidValues.includes(response)) return false;
+  return Math.abs(
+    parseFloat(response.replace(/[$,]+/g,"")) -
+    answer
+  ) <= margin;
 };
 
 const InputRow = function InputRow(props) {
-  const { type, response, answer, margin, submitted } = props;
+  const { type, response, answer, margin, submitted, items } = props;
   let Input;
+  let isCorrect = true;
 
-  const isCorrect = checkAnswer(response, answer, margin);
+  if (type === 'text') {
+    isCorrect = checkAnswer(response, answer, margin);
+  } else if (type === 'picker') {
+    isCorrect = (answer === response);
+  }
 
   let feedbackStyle = {};
 
@@ -24,6 +35,8 @@ const InputRow = function InputRow(props) {
 
   if (type === 'text') {
     Input = FreeInput;
+  } else if (type === 'picker') {
+    Input = PickerInput;
   } else {
     Input = FreeInput;
   }

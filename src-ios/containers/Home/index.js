@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   AsyncStorage,
+  ScrollView,
+  Text,
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -23,10 +25,10 @@ class Home extends React.Component {
   componentDidMount() {
     const lastModKeys = cases.map((e, i) => `LastModifiedc${i}`);
     AsyncStorage.multiGet(lastModKeys, (err, stores) => {
-      console.log('stores are ', stores);
       const lastModified = stores.map(res => res[1]);
       this.setState({ lastModified });
     });
+    //AsyncStorage.clear();
   }
 
   render() {
@@ -34,7 +36,7 @@ class Home extends React.Component {
     const { lastModified } = this.state;
 
     return (
-      <View>
+      <ScrollView>
         {cases.map((e, i) => <CasePanel
           key={e.name}
           caseIndex={i}
@@ -42,7 +44,7 @@ class Home extends React.Component {
           navigation={navigation}
           lastModified={lastModified[i]}
         />)}
-      </View>
+      </ScrollView>
     );
   }
 }

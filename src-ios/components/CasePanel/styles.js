@@ -23,7 +23,11 @@ const styles = {
 
   textMoreRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+  },
+
+  titleAndCompany: {
+    marginRight: 10,
+    flex: 1,
   },
 
   textBody: {

@@ -1,6 +1,8 @@
 import React from 'react';
 import {
+  KeyboardAvoidingView,
   ScrollView,
+  Text,
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -8,6 +10,7 @@ import styles from './styles';
 import ExplanationModal from '../ExplanationModal';
 import SubmitButton from '../SubmitButton';
 import InputRow from '../InputRow';
+import PickerInput from '../PickerInput';
 
 const CasePage = function CasePage({
   answer,
@@ -52,7 +55,11 @@ const CasePage = function CasePage({
   };
 
   return (
-    <View style={styles.casePage}>
+    <KeyboardAvoidingView
+      behavior='position'
+      style={styles.casePage}
+      contentContainerStyle={styles.casePageContainer}
+    >
       {(answer.type) ? (
         <ExplanationModal {...modalProps}>
           <Explanation />
@@ -64,16 +71,12 @@ const CasePage = function CasePage({
         </View>
       </ScrollView>
       {(answer.type) ? (
-        <View style={styles.answerRow}>
-          <View style={styles.inputRow}>
-            <InputRow {...inputProps} />
-          </View>
-          <View style={styles.buttonRow}>
-            <SubmitButton {...buttonProps} />
-          </View>
+        <View>
+          <InputRow {...inputProps} />
+          <SubmitButton {...buttonProps} />
         </View>
       ) : <View />}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -90,6 +93,8 @@ const propTypes = {
   submittedById: PropTypes.shape().isRequired,
   toggleModal: PropTypes.func.isRequired,
 };
+
+
 
 CasePage.propTypes = propTypes;
 
