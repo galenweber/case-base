@@ -8,10 +8,9 @@ import {
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
 import styles from './styles';
-import bcgImgSrc from '../../assets/images/company-logos/bcg/bcg-logo.png';
 import settingsImgSrc from '../../assets/images/settings/ic_settings.png';
 
-const CasePanel = function CasePanel({ navigation, pages, name, company, caseIndex, lastModified, }) {
+const CasePanel = function CasePanel({ navigation, pages, name, company, thumbnail, caseIndex, lastModified, }) {
 
   return (
     <TouchableOpacity
@@ -24,7 +23,7 @@ const CasePanel = function CasePanel({ navigation, pages, name, company, caseInd
     >
       <Image
         style={styles.image}
-        source={bcgImgSrc}
+        source={thumbnail}
       />
       <View
         style={styles.textBody}
