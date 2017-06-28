@@ -4,12 +4,12 @@ import Dimensions from 'Dimensions';
 import {
   View,
 } from 'react-native';
-import BodyText from '../../../BodyText';
-import BlockQuote from '../../../BlockQuote';
-import ImageFrame from '../../../ImageFrame';
-import B from '../../../BoldText';
-import I from '../../../ItalicText';
-import Fraction from '../../../Fraction';
+import BodyText from '../../../../BodyText';
+import BlockQuote from '../../../../BlockQuote';
+import ImageFrame from '../../../../ImageFrame';
+import B from '../../../../BoldText';
+import I from '../../../../ItalicText';
+import Fraction from '../../../../Fraction';
 
 const Body = function Body() {
   return (

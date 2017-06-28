@@ -4,13 +4,13 @@ import Dimensions from 'Dimensions';
 import {
   View,
 } from 'react-native';
-import BodyText from '../../../BodyText';
-import BlockQuote from '../../../BlockQuote';
-import ImageFrame from '../../../ImageFrame';
-import B from '../../../BoldText';
-import I from '../../../ItalicText';
+import BodyText from '../../../../BodyText';
+import BlockQuote from '../../../../BlockQuote';
+import ImageFrame from '../../../../ImageFrame';
+import B from '../../../../BoldText';
+import I from '../../../../ItalicText';
 // 1080w 1200h
-import imgSrc from '../../../../assets/images/case-graphics/case-2/page-9/one.png';
+import imgSrc from '../../../../../assets/images/case-graphics/case-2/page-9/one.png';
 
 const win = Dimensions.get('window');
 

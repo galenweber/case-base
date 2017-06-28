@@ -10,16 +10,31 @@ import dateFormat from 'dateformat';
 import styles from './styles';
 import settingsImgSrc from '../../assets/images/settings/ic_settings.png';
 
-const CasePanel = function CasePanel({ navigation, pages, name, company, thumbnail, caseIndex, lastModified, }) {
+const CasePanel = function CasePanel({ navigation, pages, name, company, thumbnail, caseIndex, lastModified, locked, sku }) {
+
+
+  function handlePress() {
+    if (locked) {
+      navigation.navigate('Settings', {
+        caseIndex,
+        name,
+        pages,
+        locked,
+        sku,
+      })
+    } else {
+      navigation.navigate('CaseSwiper', {
+        pages,
+        name,
+        caseIndex,
+      })
+    }
+  }
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('CaseSwiper', {
-        pages,
-        name,
-        caseIndex,
-      })}
+      onPress={handlePress}
     >
       <Image
         style={styles.image}
@@ -44,6 +59,8 @@ const CasePanel = function CasePanel({ navigation, pages, name, company, thumbna
               caseIndex,
               name,
               pages,
+              locked,
+              sku,
             })}
           >
             <Image

@@ -3,11 +3,11 @@ import {
   View,
   Text,
 } from 'react-native';
-import BodyText from '../../../BodyText';
-import MathText from '../../../MathText';
-import Subheader from '../../../Subheader';
-import Fraction from '../../../Fraction';
-import I from '../../../ItalicText';
+import BodyText from '../../../../BodyText';
+import MathText from '../../../../MathText';
+import Subheader from '../../../../Subheader';
+import Fraction from '../../../../Fraction';
+import I from '../../../../ItalicText';
 
 const Explanation = function Explanation() {
   return (

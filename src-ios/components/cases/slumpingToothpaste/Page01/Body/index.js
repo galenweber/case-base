@@ -4,6 +4,7 @@ import {
   View,
 } from 'react-native';
 import BodyText from '../../../../BodyText';
+import BlockQuote from '../../../../BlockQuote';
 import Header from '../../../../Header';
 
 const Body = function Body() {
@@ -27,6 +28,9 @@ const Body = function Body() {
         <BodyText>
           Note that Crestgate works with outlets – both supermarkets and discount stores – to coordinate pricing and discounts.
         </BodyText>
+        <BlockQuote>
+          Swipe to move to the next page.
+        </BlockQuote>
     </View>
   );
 };

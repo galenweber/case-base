@@ -1,5 +1,5 @@
 import React from 'react';
-import CasePage from '../../CasePage';
+import CasePage from '../../../CasePage';
 import Body from './Body';
 
 export default function Page07(props) {

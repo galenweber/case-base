@@ -3,8 +3,8 @@ import React from 'react';
 import {
   View,
 } from 'react-native';
-import BodyText from '../../../BodyText';
-import Header from '../../../Header';
+import BodyText from '../../../../BodyText';
+import Header from '../../../../Header';
 
 const Body = function Body() {
   return (

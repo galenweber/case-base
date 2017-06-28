@@ -4,6 +4,7 @@ import {
   View,
 } from 'react-native';
 import BodyText from '../../../../BodyText';
+import BlockQuote from '../../../../BlockQuote';
 import Header from '../../../../Header';
 
 const Body = function Body() {
@@ -30,6 +31,9 @@ const Body = function Body() {
       <BodyText>
         Work through the following prompts to form your recommendations.
       </BodyText>
+      <BlockQuote>
+        Swipe to move to the next page.
+      </BlockQuote>
     </View>
   );
 };
