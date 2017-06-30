@@ -3,25 +3,23 @@ import {
   Alert,
   AsyncStorage,
   Button,
+  NativeModules,
   Text,
   View,
-  TouchableOpacity,
 } from 'react-native';
-import { NativeModules } from 'react-native'
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styles from './styles';
-import Subheader from '../../components/Subheader';
 import B from '../../components/BoldText';
 import * as actions from '../../actions';
 
-const { InAppUtils } = NativeModules
+const { InAppUtils } = NativeModules;
 
 const mapStateToProps = state => state;
 
 class Settings extends React.Component {
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     title: 'Case Settings',
   });
 
@@ -35,8 +33,16 @@ class Settings extends React.Component {
     };
   }
 
-  handlePurchasePress() {
+  componentDidMount() {
+    const { sku } = this.props.navigation.state.params;
+    InAppUtils.loadProducts([sku], (error) => {
+      if (error) return error;
+      this.setState({ inStock: true });
+      return true;
+    });
+  }
 
+  handlePurchasePress() {
     const {
       unlock,
       sku,
@@ -51,7 +57,9 @@ class Settings extends React.Component {
 
     this.setState({ purchasing: true });
 
-    InAppUtils.purchaseProduct(sku, (error, response) => {
+    unlock(sku);
+
+    return InAppUtils.purchaseProduct(sku, (error, response) => {
       if (error) {
         this.setState({ purchasing: false });
         return error;
@@ -60,20 +68,21 @@ class Settings extends React.Component {
       if (response && response.productIdentifier) {
         AsyncStorage.setItem(`unlocked_${sku}`, 'true');
         unlock(sku);
-        Alert.alert(
+        return Alert.alert(
           'Purchase Successful',
           `Your Transaction ID is ${response.transactionIdentifier}`,
           [
             {
               text: 'OK',
-              onPress: () => this.setState({ locked: false })
+              onPress: () => this.setState({ locked: false }),
             },
-          ]
+          ],
         );
       }
+
+      return 'error';
     });
   }
-
 
   handleClearPress(caseIndex, pages) {
     Alert.alert(
@@ -82,14 +91,14 @@ class Settings extends React.Component {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel pressed'),
-          style: 'cancel'
+          onPress: () => 'cancel',
+          style: 'cancel',
         },
         {
           text: 'Clear',
-          onPress: () => this.clearCases(caseIndex, pages)
-        }
-      ]
+          onPress: () => this.clearCases(caseIndex, pages),
+        },
+      ],
     );
   }
 
@@ -98,16 +107,7 @@ class Settings extends React.Component {
     this.props.clearResponses(keys);
   }
 
-  componentDidMount() {
-    const { sku } = this.props.navigation.state.params;
-    InAppUtils.loadProducts([sku], (error, products) => {
-      if (error) return error;
-      this.setState({ inStock: true });
-    });
-  }
-
   render() {
-
     const {
       name,
       caseIndex,
@@ -164,8 +164,7 @@ class Settings extends React.Component {
           >
             CASE TITLE:
           </Text>
-          <Text
-          >
+          <Text>
             {name}
           </Text>
         </View>
@@ -181,11 +180,12 @@ class Settings extends React.Component {
 }
 
 Settings.propTypes = {
+  clearResponses: PropTypes.func.isRequired,
+  navigation: PropTypes.shape().isRequired,
 };
 
 export default connect(
   mapStateToProps,
   actions,
 )(Settings);
-
 

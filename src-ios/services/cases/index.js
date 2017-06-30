@@ -28,7 +28,7 @@ export default [
     name: 'Strengthening Disability Assistance',
     sku: 'laraguay_case_purchase',
     company: 'McKinsey & Company',
-    locked: false,
+    locked: true,
     thumbnail: mckImgSrc,
     pages: laraguayAssistance,
   },

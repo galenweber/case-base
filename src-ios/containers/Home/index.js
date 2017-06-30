@@ -1,18 +1,13 @@
 import React from 'react';
 import {
-  Alert,
   AsyncStorage,
-  Button,
   ScrollView,
-  Text,
   View,
 } from 'react-native';
-import { NativeModules } from 'react-native'
 import PropTypes from 'prop-types';
 import CasePanel from '../../components/CasePanel';
 import cases from '../../services/cases';
 
-const { InAppUtils } = NativeModules
 
 class Home extends React.Component {
 
@@ -26,9 +21,11 @@ class Home extends React.Component {
       lastModified: [],
       products: null,
       locked: cases
-        .reduce((p, c) => Object.assign({ [c.sku]: c.locked }, p),{})
+        .reduce((p, c) => (
+          Object.assign(p, { [c.sku]: c.locked })
+        ), {}),
     };
-    AsyncStorage.clear();
+     //AsyncStorage.clear();
   }
 
   componentDidMount() {
@@ -46,8 +43,8 @@ class Home extends React.Component {
             this.setState({
               locked: Object.assign(
                 this.state.locked,
-                {[e.sku]: false},
-              )
+                { [e.sku]: false },
+              ),
             });
           }
         });
@@ -55,21 +52,18 @@ class Home extends React.Component {
   }
 
   unlock(sku) {
-    AsyncStorage.setItem(`unlocked_${sku}`, "true");
+    AsyncStorage.setItem(`unlocked_${sku}`, 'true');
     this.setState({
       locked: Object.assign(
         this.state.locked,
-        {[sku]: false},
-      )
+        { [sku]: false },
+      ),
     });
-  }
-
-  handlePurchase(sku) {
   }
 
   render() {
     const { navigation } = this.props;
-    const { lastModified, products, locked } = this.state;
+    const { lastModified, locked } = this.state;
 
     return (
       <View>
@@ -89,8 +83,8 @@ class Home extends React.Component {
   }
 }
 
-//Home.propTypes = {
-  //navigation: PropTypes.shape().isRequired,
-//};
+Home.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+};
 
 export default Home;
