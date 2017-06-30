@@ -27,15 +27,53 @@ class Settings extends React.Component {
 
   constructor(props) {
     super(props);
+    const { locked } = this.props.navigation.state.params;
     this.state = {
-      sku: props.sku,
       inStock: false,
+      purchasing: false,
+      locked,
     };
   }
 
   handlePurchasePress() {
 
+    const {
+      unlock,
+      sku,
+    } = this.props.navigation.state.params;
+
+    const {
+      inStock,
+      purchasing,
+     } = this.state;
+
+    if (!inStock || purchasing) return false;
+
+    this.setState({ purchasing: true });
+
+    InAppUtils.purchaseProduct(sku, (error, response) => {
+      if (error) {
+        this.setState({ purchasing: false });
+        return error;
+      }
+
+      if (response && response.productIdentifier) {
+        AsyncStorage.setItem(`unlocked_${sku}`, 'true');
+        unlock(sku);
+        Alert.alert(
+          'Purchase Successful',
+          `Your Transaction ID is ${response.transactionIdentifier}`,
+          [
+            {
+              text: 'OK',
+              onPress: () => this.setState({ locked: false })
+            },
+          ]
+        );
+      }
+    });
   }
+
 
   handleClearPress(caseIndex, pages) {
     Alert.alert(
@@ -61,17 +99,25 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
-    const { sku } = this.state;
+    const { sku } = this.props.navigation.state.params;
     InAppUtils.loadProducts([sku], (error, products) => {
       if (error) return error;
       this.setState({ inStock: true });
     });
   }
 
-
   render() {
 
-    const { name, caseIndex, pages, locked } = this.props.navigation.state.params;
+    const {
+      name,
+      caseIndex,
+      pages,
+    } = this.props.navigation.state.params;
+
+    const { purchasing, locked } = this.state;
+    const purchaseBtnText = (purchasing) ?
+      'Processing...'
+      : 'Buy Case ($0.99)';
 
     return (
       <View>
@@ -91,8 +137,8 @@ class Settings extends React.Component {
             </View>
             <View style={styles.buttonWrapper}>
               <Button
-                onPress={() => this.handlePress(caseIndex, pages)}
-                title="Unlock Case ($0.99)"
+                onPress={() => this.handlePurchasePress()}
+                title={purchaseBtnText}
               />
             </View>
           </View>

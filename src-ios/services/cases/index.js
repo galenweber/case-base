@@ -10,7 +10,7 @@ import mckImgSrc from '../../assets/images/company-logos/mck/mck-logo.png';
 export default [
   {
     name: 'Slumping Toothpaste Sales',
-    sku: 'slumping_toothpaste_sales',
+    sku: 'toothpaste_case_purchase',
     company: 'Boston Consulting Group',
     locked: false,
     thumbnail: bcgImgSrc,
@@ -18,17 +18,17 @@ export default [
   },
   {
     name: 'Broadband in Basra',
-    sku: 'broadband_in_basra',
+    sku: 'broadband_case_purchase',
     company: 'Boston Consulting Group',
     locked: false,
     thumbnail: bcgImgSrc,
     pages: broadbandInBasra,
   },
   {
-    name: 'Strengthening Disability Assistance in Laraguay',
-    sku: 'strengthening_disability_assistance',
+    name: 'Strengthening Disability Assistance',
+    sku: 'laraguay_case_purchase',
     company: 'McKinsey & Company',
-    locked: true,
+    locked: false,
     thumbnail: mckImgSrc,
     pages: laraguayAssistance,
   },

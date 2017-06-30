@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  AlertIOS,
+  Alert,
   AsyncStorage,
   Button,
   ScrollView,
@@ -28,6 +28,7 @@ class Home extends React.Component {
       locked: cases
         .reduce((p, c) => Object.assign({ [c.sku]: c.locked }, p),{})
     };
+    AsyncStorage.clear();
   }
 
   componentDidMount() {
@@ -42,39 +43,28 @@ class Home extends React.Component {
         .getItem(`unlocked_${e.sku}`)
         .then((unlocked) => {
           if (unlocked) {
-            this.setState(Object.assign(
-              {[e.sku]: false},
-              this.state.locked)
-            );
+            this.setState({
+              locked: Object.assign(
+                this.state.locked,
+                {[e.sku]: false},
+              )
+            });
           }
         });
     });
-
-
-    var products = [
-       'laraguay_case_purchase',
-    ];
-
-    InAppUtils.loadProducts(products, (error, products) => {
-      if (error) console.log('error: ', error);
-      console.log('products are ', products);
-      this.setState({ products });
-       //update store here.
-    });
-    //AsyncStorage.clear();
   }
 
-  buy() {
-    var productIdentifier = 'laraguay_case_purchase';
-    InAppUtils.purchaseProduct(productIdentifier, (error, response) => {
-      // NOTE for v3.0: User can cancel the payment which will be available as error object here.
-      if(error) console.log('error ', error);
-      if(response && response.productIdentifier) {
-        AlertIOS.alert('Purchase Successful', 'Your Transaction ID is ' + response.transactionIdentifier);
-        //unlock store here.
-      }
+  unlock(sku) {
+    AsyncStorage.setItem(`unlocked_${sku}`, "true");
+    this.setState({
+      locked: Object.assign(
+        this.state.locked,
+        {[sku]: false},
+      )
     });
-    console.log('hello!');
+  }
+
+  handlePurchase(sku) {
   }
 
   render() {
@@ -83,21 +73,17 @@ class Home extends React.Component {
 
     return (
       <View>
-        <Text>Products are: {JSON.stringify(products)}</Text>
         <ScrollView>
           {cases.map((e, i) => <CasePanel
+            {...e}
+            unlock={this.unlock.bind(this)}
             locked={locked[e.sku]}
             key={e.name}
             caseIndex={i}
-            {...e}
             navigation={navigation}
             lastModified={lastModified[i]}
           />)}
         </ScrollView>
-        <Button
-          title="buy buy buy!"
-          onPress={this.buy}
-        />
       </View>
     );
   }

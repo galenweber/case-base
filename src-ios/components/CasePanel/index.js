@@ -10,8 +10,7 @@ import dateFormat from 'dateformat';
 import styles from './styles';
 import settingsImgSrc from '../../assets/images/settings/ic_settings.png';
 
-const CasePanel = function CasePanel({ navigation, pages, name, company, thumbnail, caseIndex, lastModified, locked, sku }) {
-
+const CasePanel = function CasePanel({ navigation, pages, name, company, thumbnail, caseIndex, lastModified, locked, sku, unlock }) {
 
   function handlePress() {
     if (locked) {
@@ -20,6 +19,7 @@ const CasePanel = function CasePanel({ navigation, pages, name, company, thumbna
         name,
         pages,
         locked,
+        unlock,
         sku,
       })
     } else {
@@ -61,6 +61,7 @@ const CasePanel = function CasePanel({ navigation, pages, name, company, thumbna
               pages,
               locked,
               sku,
+              unlock,
             })}
           >
             <Image
