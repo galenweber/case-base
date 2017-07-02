@@ -9,7 +9,7 @@ import styles from './styles';
 const MathText = function MathText({ children }) {
   return (
     <ScrollView
-      horizontal={true}
+      horizontal
       style={styles.mathScroll}
     >
       <Text style={styles.mathText} >

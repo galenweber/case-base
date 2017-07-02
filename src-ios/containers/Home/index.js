@@ -25,7 +25,8 @@ class Home extends React.Component {
           Object.assign(p, { [c.sku]: c.locked })
         ), {}),
     };
-     //AsyncStorage.clear();
+
+    //AsyncStorage.clear();
   }
 
   componentDidMount() {

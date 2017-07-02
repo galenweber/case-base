@@ -57,8 +57,6 @@ class Settings extends React.Component {
 
     this.setState({ purchasing: true });
 
-    unlock(sku);
-
     return InAppUtils.purchaseProduct(sku, (error, response) => {
       if (error) {
         this.setState({ purchasing: false });
@@ -137,6 +135,7 @@ class Settings extends React.Component {
             </View>
             <View style={styles.buttonWrapper}>
               <Button
+                disabled={purchasing}
                 onPress={() => this.handlePurchasePress()}
                 title={purchaseBtnText}
               />

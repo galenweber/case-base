@@ -45,9 +45,10 @@ const propTypes = {
 const defaultProps = {
   response: '',
   submitted: false,
-}
+};
 
 SubmitButton.propTypes = propTypes;
+SubmitButton.defaultProps = defaultProps;
 
 export default SubmitButton;
 

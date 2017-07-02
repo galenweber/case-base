@@ -4,11 +4,6 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import DropDown, {
-  Select,
-  Option,
-  OptionList,
-} from 'react-native-selectme';
 import styles from './styles';
 
 
@@ -19,15 +14,12 @@ const PickerInput = function PickerInput({
   id,
   items,
 }) {
-
-
-  const handleValueChange = function handleValueChange(itemVal, itemInd) {
+  const handleValueChange = function handleValueChange(itemVal) {
     if (!submitted) handleInput(id, itemVal);
-  }
+  };
 
   return (
-    <View
-    >
+    <View>
       <Picker
         enabled={!submitted}
         style={styles.pickerInput}
@@ -43,13 +35,15 @@ const PickerInput = function PickerInput({
         ))}
       </Picker>
     </View>
-);
+  );
 };
 
 const propTypes = {
-  submitted: PropTypes.bool,
   handleInput: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
+  response: PropTypes.string,
+  submitted: PropTypes.bool,
 };
 
 const defaultProps = {

@@ -11,8 +11,8 @@ const checkAnswer = function checkAnswer(response, answer, margin) {
   const invalidValues = [null, undefined];
   if (invalidValues.includes(response)) return false;
   return Math.abs(
-    parseFloat(response.replace(/[$,]+/g,"")) -
-    answer
+    parseFloat(response.replace(/[$,]+/g, ''))
+    - answer,
   ) <= margin;
 };
 
@@ -49,10 +49,24 @@ const InputRow = function InputRow(props) {
 };
 
 const propTypes = {
+  answer: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.null,
+  ]),
+  margin: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.null,
+  ]),
+  response: PropTypes.string,
   type: PropTypes.string.isRequired,
 };
 
+const defaultProps = {
+  response: '',
+}
+
 InputRow.propTypes = propTypes;
+InputRow.defaultProps = defaultProps;
 
 export default InputRow;
 

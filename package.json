@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "lint": "esw -w src-ios/containers",
+    "lint": "esw -w src-ios/components",
     "test": "jest"
   },
   "dependencies": {

@@ -45,9 +45,9 @@ class CaseSwiper extends React.Component {
       >
         <Swiper
           style={styles.wrapper}
-          loadMinimal={true}
+          loadMinimal
           loadMinimalSize={1}
-          loadMinimalLoader={<ActivityIndicator/>}
+          loadMinimalLoader={<ActivityIndicator />}
         >
           {pages.map((Page, index) => (
             <View style={styles.container} key={`page-${Page.name}`}>
@@ -61,6 +61,7 @@ class CaseSwiper extends React.Component {
 }
 
 const propTypes = {
+  handleInput: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
@@ -69,8 +70,7 @@ const propTypes = {
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  handleInput: PropTypes.func.isRequired,
-  submitResponse: PropTypes.func.isRequired,
+  setSubmitted: PropTypes.func.isRequired,
 };
 
 CaseSwiper.propTypes = propTypes;

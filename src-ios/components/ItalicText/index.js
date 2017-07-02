@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const BoldText = function BoldText({ children }) {
   return (
-    <Text style={{fontStyle: 'italic'}} >
+    <Text style={{ fontStyle: 'italic' }} >
       { children }
     </Text>
   );
